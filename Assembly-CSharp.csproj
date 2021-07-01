@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C653AAC8-E8E3-B96A-D30F-27D3C8EAF8F5}</ProjectGuid>
+    <ProjectGuid>{E2556BD3-C97B-4147-990E-167CB0DE1EE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,10 +54,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GridController.cs" />
+    <Compile Include="Assets\Scripts\GridPoints.cs" />
     <Compile Include="Assets\Scripts\SelectionController.cs" />
     <Compile Include="Assets\Scripts\Hexagons.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
-    <Compile Include="Assets\Scripts\GridPoints.cs" />
+    <Compile Include="Assets\Scripts\HexagonTio.cs" />
+    <Compile Include="Assets\Scripts\HexagonPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

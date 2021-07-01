@@ -41,12 +41,12 @@ public class SelectionController : MonoBehaviour
         return FindNearestTrio(fromThis, hexagons, recursive);
     }
 
-    private void ClearSelectedHighLight()
+    public void ClearSelectedHighLight()
     {
         for (int i = 0; i < _selectedHexagons.Length; i++)
         {
             _selectedHexagons[i].GetComponent<Hexagons>().IsSelected = false;
-            _selectedHexagons[i].transform.parent = null;
+            _selectedHexagons[i].transform.parent = _selectedHexagons[i].GetComponent<Hexagons>().MyGridPoint.gameObject.transform;
         }
         _isSelectedTrio = false;
     }

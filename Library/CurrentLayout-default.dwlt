@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 1007
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_MinSize: {x: 881, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 63
+  controlID: 147
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 93
+  controlID: 59
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 94
+  controlID: 60
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -399,22 +399,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\RyoumaX\Desktop\HexagonEmre
+  m_LastProjectPath: C:\Users\RyoumaX\Desktop\HexagonEmreGit
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 76430000
-    m_LastClickedID: 17270
-    m_ExpandedIDs: 000000006a43000000ca9a3b
+    m_SelectedIDs: 88430000
+    m_LastClickedID: 17288
+    m_ExpandedIDs: 000000007a43000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,7 +442,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006a430000
+    m_ExpandedIDs: 000000007a430000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -565,21 +565,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0ce3ffff40fbffff
+      m_ExpandedIDs: 88f5fdffb003feffc403feffd803feffec03feff0004feff1404feff2804feff3c04feff5004feff5c24feffbc33feff2034feff3434feff4834feff5c34feff7034feff8434feff9834feffac34feffc034feffd434feffe834feffd053feffe453fefff853feff0c54feffb85efeff12b5feff62b5feff52b6feff8eb6feff06b7feff9cd7feffb0d7feffc4d7feffd8d7feff14d8feffe2e1fefff6e1feffe4e6fefff8e6feff0ce7feff34e7feffe6ebfefffaebfeff0eecfeff22ecfeff36ecfeff4aecfeff9aecfeffaeecfeffc2ecfeffd6ecfeffeaecfefffeecfeff12edfeff26edfeffb6eefeffcaeefeffdeeefefff2eefeff06effeff1aeffeff2eeffeff6aeffeff7eeffeff92effeffa6effeffbaeffeffceeffeffe2effeff92fafeffcefafeffe2fafeff586dffff3885ffffd885ffffec85ffff1895ffffcc95ffffe095ffff0c97ffff2097ffffc097ffffd497ffff60afffffeabcffffdac3ffff40fbffffd6420000f0420000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: HexPrefab(Clone)
+        m_OriginalName: HexPrefab(Clone)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -110042
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -625,9 +625,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.8604943, y: 7.9966965, z: -1.9318416}
+    m_Target: {x: 2.0059998, y: 5.78435, z: -0.31469557}
     speed: 2
-    m_Value: {x: 1.8604943, y: 7.9966965, z: -1.9318416}
+    m_Value: {x: 2.0059998, y: 5.78435, z: -0.31469557}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -678,9 +678,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 8.928343
+    m_Target: 7.870795
     speed: 2
-    m_Value: 8.928343
+    m_Value: 7.870795
   m_Ortho:
     m_Target: 1
     speed: 2

@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _highLightedObject: {fileID: 7958150771533997732}
+  _hexSprite: {fileID: 1654048397926182398}
 --- !u!1 &7958150771533997732
 GameObject:
   m_ObjectHideFlags: 0

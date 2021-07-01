@@ -8,9 +8,10 @@ public class Hexagons : MonoBehaviour
     private GameObject _highLightedObject;
     private int _x, _y;
     private bool _isSelected;
-    private List<Hexagons> _neighbors = new List<Hexagons>();
-    private List<Hexagons> _neighborsSameColor = new List<Hexagons>();
     private Color _hexColor;
+    private GridPoints _myGridPoint;
+    [SerializeField]
+    private SpriteRenderer _hexSprite;
     public bool IsSelected
     {
         get
@@ -25,22 +26,28 @@ public class Hexagons : MonoBehaviour
     }    
     public int Y { get => _y; set => _y = value; }
     public int X { get => _x; set => _x = value; }
-    public List<Hexagons> Neighbors { get => _neighbors; }
-    public Color HexColor { get => _hexColor; set => _hexColor = value; }
-
-    private void Awake()
+    public GridPoints MyGridPoint { get => _myGridPoint; set => _myGridPoint = value; }
+    public Color HexColor
     {
-        HexColor = this.GetComponent<SpriteRenderer>().color;
+        get
+        {
+            return _hexColor;
+        }
+        set
+        {
+            _hexColor = value;
+            _hexSprite.color = value;
+            _myGridPoint.MyHexColor = value;
+        }
+    }
+    
+    private void Start()
+    {
+        _hexSprite.color = _hexColor;
     }
 
     void SetHighLightActivate(bool value)
     {
         _highLightedObject.SetActive(value);
-    }
-
-    public void AddNeighbors(Hexagons _neighbor)
-    {
-        _neighbors.Add(_neighbor);
-        if (_neighbor.HexColor == this._hexColor) _neighborsSameColor.Add(_neighbor);
     }
 }

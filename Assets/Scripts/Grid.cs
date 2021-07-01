@@ -24,17 +24,21 @@ public class Grid : GridController
     public GridPoints[,] _gridPoints;
     private Vector3 _mousePosition;
     private GameObject[] _hexagonList;
+    private HexagonTio _hexTrio;
+    private SelectionController _sc;
 
     void Start()
     {
-        _hexagons = new Hexagons[width, height];
+        _hexTrio = this.gameObject.GetComponent<HexagonTio>();
+        _hexagonList = new GameObject[width * height];
+        _gridPoints = new GridPoints[width, height];
+        _sc = GameObject.Find("SelectionController").GetComponent<SelectionController>();
         CreateGridWithHexagons();     
     }
 
     private void CreateGridWithHexagons()
     {
         int i = 0;
-        _hexagonList = new GameObject[width * height];
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -43,14 +47,19 @@ public class Grid : GridController
                 if (x % 2 == 1) yPos += yOffset / 2f;
                 GameObject gridGameObject = (GameObject)Instantiate(_gridPointPrefab, new Vector3(x * xOffset, yPos, 0), Quaternion.identity);
                 gridGameObject.transform.parent = this.transform;
+                _gridPoints[x, y] = gridGameObject.GetComponent<GridPoints>();
                 GameObject hexGameObject = (GameObject)Instantiate(_hexPrefab, new Vector3(x * xOffset, yPos, 0), Quaternion.identity);
                 hexGameObject.transform.parent = gridGameObject.transform;
                 hexGameObject.transform.localPosition = new Vector3(0, 0, 0);
-                hexGameObject.GetComponent<SpriteRenderer>().color = Colors[Random.Range(0, Colors.Length)];
+                Hexagons hx = hexGameObject.GetComponent<Hexagons>();
+                hx.MyGridPoint = _gridPoints[x, y];
+                hx.HexColor = Colors[Random.Range(0, Colors.Length)];
+                _gridPoints[x, y].MyHex = hx;
+                _gridPoints[x, y].X = x;
+                _gridPoints[x, y].Y = y;
                 gridGameObject.name = x + "_" + y;
-                _hexagons[x, y] = hexGameObject.GetComponent<Hexagons>();
-                _hexagons[x, y].X = x;
-                _hexagons[x, y].Y = y;
+                hx.X = x;
+                hx.Y = y;
                 _hexagonList[i++] = hexGameObject;
             }
         }
@@ -68,12 +77,12 @@ public class Grid : GridController
                     if (x % 2 == 1)
                     {
                         if (IsRowColExist(x + _browseX[i], y + _browseYUp[i]))
-                            _hexagons[x, y].AddNeighbors(_hexagons[x + _browseX[i], y + _browseYUp[i]]);
+                            _gridPoints[x, y].AddNeighbors(_gridPoints[x + _browseX[i], y + _browseYUp[i]]);
                     }
                     else
                     {
                         if (IsRowColExist(x + _browseX[i], y + _browseYDown[i]))
-                            _hexagons[x, y].AddNeighbors(_hexagons[x + _browseX[i], y + _browseYDown[i]]);
+                            _gridPoints[x, y].AddNeighbors(_gridPoints[x + _browseX[i], y + _browseYDown[i]]);
                     }
 
                 }
@@ -88,6 +97,52 @@ public class Grid : GridController
             _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 12f));
             if (_mousePosition.y < 8)
                 _selection.FindNearestTrio(_mousePosition, _hexagonList, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CheckAllTrio();
+            _hexTrio.ExplodeHexagons();
+            FillHexagons();
+        }
+    }
+
+    public void FillHexagons()
+    {
+        if(_sc.IsSelectedTrio) _sc.ClearSelectedHighLight();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (_gridPoints[x, y].MyHex == null) _gridPoints[x, y].MyHex = _gridPoints[x, y].CallNewHexagon(y + 1);
+            }
+        }
+    }
+
+    public GridPoints GetGridOnIndex(int x, int y)
+    {
+        if (y >= height) return null;
+        return _gridPoints[x, y];
+    }
+
+    private void CheckAllTrio()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                _hexTrio.DetectHexagonTrio(_gridPoints[x, y], _gridPoints[x, y].SameColorNeighbors);
+            }
+        }
+    }
+
+    public void CheckSameColorNeighbours()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                _gridPoints[x, y].CheckSameColorNeighbors();
+            }
         }
     }
 
