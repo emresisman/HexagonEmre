@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 633279647}
-        m_TargetAssemblyTypeName: GridController, Assembly-CSharp
+      - m_Target: {fileID: 178678750}
+        m_TargetAssemblyTypeName: SelectionController, Assembly-CSharp
         m_MethodName: TurnSelectionToCounterClockwise
         m_Mode: 1
         m_Arguments:
@@ -368,7 +368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hexInPool: []
-  _grid: {fileID: 1119649543}
 --- !u!4 &150195501
 Transform:
   m_ObjectHideFlags: 0
@@ -426,6 +425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5d06e1113186541b52b5ef4ecf77c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _temp: {fileID: 2017063581}
+  _selectedHexagons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +525,6 @@ GameObject:
   - component: {fileID: 633279650}
   - component: {fileID: 633279649}
   - component: {fileID: 633279648}
-  - component: {fileID: 633279647}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -529,18 +532,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &633279647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633279646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee4c64b08f37d14c9a5c15e3d6ff670, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &633279648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +653,6 @@ MonoBehaviour:
   width: 8
   height: 9
   _hexPrefab: {fileID: 4825489413556359371, guid: 44f7dd2e28404184e8cd9dec9a0ba2ae, type: 3}
-  _gridPointPrefab: {fileID: 8126549930048200118, guid: 8ed04be1ec0d85240bd8e0c46e629cce, type: 3}
 --- !u!4 &1119649544
 Transform:
   m_ObjectHideFlags: 0
@@ -839,8 +829,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 633279647}
-        m_TargetAssemblyTypeName: GridController, Assembly-CSharp
+      - m_Target: {fileID: 178678750}
+        m_TargetAssemblyTypeName: SelectionController, Assembly-CSharp
         m_MethodName: TurnSelectionToClockwise
         m_Mode: 1
         m_Arguments:
@@ -1047,3 +1037,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835503337}
   m_CullTransparentMesh: 1
+--- !u!1 &2017063579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017063582}
+  - component: {fileID: 2017063581}
+  m_Layer: 0
+  m_Name: TempHex
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2017063581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017063579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e973972f6f50fc14db926d48a56ad702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highLightedObject: {fileID: 0}
+  _hexSprite: {fileID: 0}
+  _neighbors: []
+  _sameColorNeighbors: []
+--- !u!4 &2017063582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017063579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

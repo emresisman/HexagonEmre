@@ -8,8 +8,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{E2556BD3-C97B-4147-990E-167CB0DE1EE2}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectGuid>{D36B55E2-7BC9-4741-990E-167CB0DE1EE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,13 +54,12 @@
     <UnityVersion>2020.3.12f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GridController.cs" />
+    <Compile Include="Assets\Scripts\HexagonPool.cs" />
+    <Compile Include="Assets\Scripts\HexagonTio.cs" />
     <Compile Include="Assets\Scripts\GridPoints.cs" />
     <Compile Include="Assets\Scripts\SelectionController.cs" />
     <Compile Include="Assets\Scripts\Hexagons.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
-    <Compile Include="Assets\Scripts\HexagonTio.cs" />
-    <Compile Include="Assets\Scripts\HexagonPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

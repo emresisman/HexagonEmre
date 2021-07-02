@@ -5,30 +5,32 @@ using UnityEngine;
 
 public class HexagonTio : MonoBehaviour
 {
+    public bool isTrioExist = false;
     private List<Hexagons> willRemoveHex = new List<Hexagons>();
     [SerializeField]
     private HexagonPool _hexPool;
 
-    public void DetectHexagonTrio(GridPoints mainGrid, List<GridPoints> neighbourGrid)
+    public void DetectHexagonTrio(Hexagons mainHexagon, List<Hexagons> neighbourHexagons)
     {
-        if (neighbourGrid.Count > 1)
+        if (neighbourHexagons.Count > 1)
         {
-            for (int i = 0; i < neighbourGrid.Count - 1; i++)
+            for (int i = 0; i < neighbourHexagons.Count - 1; i++)
             {
-                for (int j = i; j < neighbourGrid.Count - 1; j++)
+                for (int j = i; j < neighbourHexagons.Count - 1; j++)
                 {
-                    if (AreTheyNeighbor(neighbourGrid[i], neighbourGrid[j + 1]))
+                    if (AreTheyNeighbor(neighbourHexagons[i], neighbourHexagons[j + 1]))
                     {
-                        AddHexToRemoveList(neighbourGrid[i].MyHex);
-                        AddHexToRemoveList(neighbourGrid[j + 1].MyHex);
-                        AddHexToRemoveList(mainGrid.MyHex);
+                        isTrioExist = true;
+                        AddHexToRemoveList(neighbourHexagons[i]);
+                        AddHexToRemoveList(neighbourHexagons[j + 1]);
+                        AddHexToRemoveList(mainHexagon);
                     }
                 }
             }
         }
     }
 
-    private bool AreTheyNeighbor(GridPoints gp1, GridPoints gp2)
+    private bool AreTheyNeighbor(Hexagons gp1, Hexagons gp2)
     {
         if (gp1.SameColorNeighbors.Contains(gp2)) return true;
         return false;
@@ -41,6 +43,15 @@ public class HexagonTio : MonoBehaviour
         {
             willRemoveHex.Add(hex);
         }
+    }
+
+    public void ResetColor()
+    {
+        foreach(Hexagons hex in willRemoveHex)
+        {
+            hex.HexColor = Grid.Instance.Colors[Random.Range(0, Grid.Instance.Colors.Length)];
+        }
+        Grid.Instance.SetHexagonsNeighbours();
     }
 
     private bool IsHexExist(Hexagons hex)
@@ -56,8 +67,6 @@ public class HexagonTio : MonoBehaviour
         {
             foreach (Hexagons hex in willRemoveHex)
             {
-                hex.MyGridPoint.MyHex = null;
-                hex.MyGridPoint = null;
                 //hex.gameObject.transform.parent = _hexPool.gameObject.transform;
                 hex.gameObject.SetActive(false);
             }

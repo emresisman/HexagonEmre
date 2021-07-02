@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class SelectionController : MonoBehaviour
 {
+    [SerializeField]
+    private Hexagons _temp;
     private GameObject _singleCheck;
     private int _singleIndex;
     private bool _isSelectedTrio = false;
     public bool IsSelectedTrio { get => _isSelectedTrio; }
+    [SerializeField]
     private GameObject[] _selectedHexagons = new GameObject[3];
-    public GameObject[] SelectedHexagons { get => _selectedHexagons; }
 
-    public int FindNearestTrio(Vector3 fromThis, GameObject[] hexagons, int recursive)
+    public int FindNearestTrio(Vector3 fromThis, GameObject[,] hexagons, int recursive)
     {
         if (recursive >= 3)
         {
             _isSelectedTrio = true;
             GoToPivotPoint();
-            SetParentToThis();
             ShortSelectedTriangleClockwise(IsSelectedTriangleRight());
             return -1;
         }
@@ -41,12 +42,61 @@ public class SelectionController : MonoBehaviour
         return FindNearestTrio(fromThis, hexagons, recursive);
     }
 
+    public void TurnSelectionToClockwise()
+    {
+        if(Grid.gameState==GameState.CanPlay)
+        {
+            _temp.X = _selectedHexagons[0].GetComponent<Hexagons>().X;
+            _temp.Y = _selectedHexagons[0].GetComponent<Hexagons>().Y;
+            _temp.gameObject.transform.position = _selectedHexagons[0].GetComponent<Hexagons>().gameObject.transform.position;
+            for (int i = 0; i <= 1; i++)
+            {
+                _selectedHexagons[i].GetComponent<Hexagons>().SetPosition(
+                    _selectedHexagons[i + 1].GetComponent<Hexagons>().X,
+                    _selectedHexagons[i + 1].GetComponent<Hexagons>().Y);
+                _selectedHexagons[i].transform.position = _selectedHexagons[i + 1].transform.position;
+            }
+            _selectedHexagons[2].GetComponent<Hexagons>().SetPosition(
+                _temp.GetComponent<Hexagons>().X,
+                _temp.GetComponent<Hexagons>().Y);
+            _selectedHexagons[2].transform.position = _temp.transform.position;
+            ShortSelectedTriangleClockwise(IsSelectedTriangleRight());
+            ClearSelectedHighLight();
+            Grid.gameState = GameState.Waiting;
+            Grid.Instance.SetHexagonsNeighbours();
+        }
+    }
+
+    public void TurnSelectionToCounterClockwise()
+    {
+        if (Grid.gameState == GameState.CanPlay)
+        {
+            _temp.X = _selectedHexagons[2].GetComponent<Hexagons>().X;
+            _temp.Y = _selectedHexagons[2].GetComponent<Hexagons>().Y;
+            _temp.gameObject.transform.position = _selectedHexagons[2].GetComponent<Hexagons>().gameObject.transform.position;
+            for (int i = 1; i >= 0; i--)
+            {
+                _selectedHexagons[i + 1].GetComponent<Hexagons>().SetPosition(
+                    _selectedHexagons[i].GetComponent<Hexagons>().X,
+                    _selectedHexagons[i].GetComponent<Hexagons>().Y);
+                _selectedHexagons[i + 1].transform.position = _selectedHexagons[i].transform.position;
+            }
+            _selectedHexagons[0].GetComponent<Hexagons>().SetPosition(
+                _temp.GetComponent<Hexagons>().X,
+                _temp.GetComponent<Hexagons>().Y);
+            _selectedHexagons[0].transform.position = _temp.transform.position;
+            ShortSelectedTriangleClockwise(IsSelectedTriangleRight());
+            ClearSelectedHighLight();
+            Grid.gameState = GameState.Waiting;
+            Grid.Instance.SetHexagonsNeighbours();
+        }
+    }
+
     public void ClearSelectedHighLight()
     {
         for (int i = 0; i < _selectedHexagons.Length; i++)
         {
             _selectedHexagons[i].GetComponent<Hexagons>().IsSelected = false;
-            _selectedHexagons[i].transform.parent = _selectedHexagons[i].GetComponent<Hexagons>().MyGridPoint.gameObject.transform;
         }
         _isSelectedTrio = false;
     }
@@ -61,14 +111,6 @@ public class SelectionController : MonoBehaviour
             z += _selectedHexagons[i].transform.position.z;
         }
         this.transform.position = new Vector3(x / 3, y / 3, x / 3);
-    }
-
-    private void SetParentToThis()
-    {
-        for (int i = 0; i < _selectedHexagons.Length; i++)
-        {
-            _selectedHexagons[i].transform.parent = this.transform;
-        }
     }
 
     private void ShortSelectedTriangleClockwise(bool isRightAligned)
